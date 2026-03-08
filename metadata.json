@@ -1,0 +1,5 @@
+{
+  "name": "Web POS System",
+  "description": "A fast, offline-capable Point of Sale system with barcode scanning and receipt printing.",
+  "requestFramePermissions": ["camera"]
+}
