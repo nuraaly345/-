@@ -69,6 +69,8 @@ export const translations = {
     averageValue: 'Average Value',
     period: 'Period',
     dateRange: 'Date Range',
+    products: 'Products',
+    cart: 'Cart',
   },
   ky: {
     appTitle: 'Сатуу Системасы',
@@ -138,6 +140,8 @@ export const translations = {
     averageValue: 'Орточо чек',
     period: 'Мезгил',
     dateRange: 'Убакыт аралыгы',
+    products: 'Товарлар',
+    cart: 'Корзина',
   },
   ru: {
     appTitle: 'POS Система',
@@ -207,6 +211,8 @@ export const translations = {
     averageValue: 'Средний чек',
     period: 'Период',
     dateRange: 'Диапазон дат',
+    products: 'Товары',
+    cart: 'Корзина',
   }
 };
 

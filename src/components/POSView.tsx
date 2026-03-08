@@ -11,6 +11,7 @@ export const POSView: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showReceipt, setShowReceipt] = useState(false);
   const [lastTxId, setLastTxId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'products' | 'cart'>('products');
   const t = useTranslation(state.settings.language);
 
   const filteredProducts = state.products.filter(p => 
@@ -42,11 +43,29 @@ export const POSView: React.FC = () => {
   };
 
   const cartTotal = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const cartItemCount = state.cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div className="flex flex-col lg:flex-row h-[calc(100vh-4rem)] gap-4 p-4 max-w-7xl mx-auto">
+      
+      {/* Mobile Tab Switcher */}
+      <div className="lg:hidden flex bg-gray-200 p-1 rounded-xl shrink-0">
+        <button 
+          className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'products' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600'}`}
+          onClick={() => setActiveTab('products')}
+        >
+          {t.products}
+        </button>
+        <button 
+          className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'cart' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600'}`}
+          onClick={() => setActiveTab('cart')}
+        >
+          {t.cart} ({cartItemCount})
+        </button>
+      </div>
+
       {/* Left Side: Products */}
-      <div className="flex-1 flex flex-col bg-white rounded-2xl shadow-sm overflow-hidden">
+      <div className={`${activeTab === 'cart' ? 'hidden' : 'flex'} lg:flex flex-1 flex-col bg-white rounded-2xl shadow-sm overflow-hidden`}>
         <div className="p-4 border-b flex gap-3">
           <div className="relative flex-1">
             <input 
@@ -86,7 +105,7 @@ export const POSView: React.FC = () => {
       </div>
 
       {/* Right Side: Cart */}
-      <div className="lg:w-[400px] bg-white rounded-2xl shadow-sm flex flex-col h-full border-l lg:border-l-0">
+      <div className={`${activeTab === 'products' ? 'hidden' : 'flex'} lg:flex lg:w-[400px] bg-white rounded-2xl shadow-sm flex-col h-full border-l lg:border-l-0`}>
         <div className="p-4 border-b bg-gray-50">
           <h2 className="font-bold text-lg flex items-center gap-2">
             <ShoppingCart className="text-blue-600" />

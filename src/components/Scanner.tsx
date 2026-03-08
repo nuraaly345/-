@@ -19,7 +19,14 @@ export const Scanner: React.FC<ScannerProps> = ({ onScan, onClose }) => {
     // Initialize scanner
     const scanner = new Html5QrcodeScanner(
       "reader",
-      { fps: 10, qrbox: { width: 250, height: 250 } },
+      { 
+        fps: 10, 
+        qrbox: { width: 250, height: 250 },
+        aspectRatio: 1.0,
+        videoConstraints: {
+          facingMode: "environment"
+        }
+      },
       /* verbose= */ false
     );
     
